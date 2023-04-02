@@ -1,0 +1,5 @@
+# Put any extra dependencies here
+# gradio==2.9.4
+gradio==3.24.1
+librosa==0.10.0post2
+nemo-toolkit[all]==1.12.0

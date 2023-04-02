@@ -1,0 +1,57 @@
+version: '3.9'
+
+services:
+  app:
+    stdin_open: true
+    tty: true
+    image: dleongsh/speech-baseline-service:1.0.0
+    volumes:
+      - ./:/workspace
+      - shared-data:/shared-data
+    ports:
+     - 8080:8080
+
+  std-inference:
+    stdin_open: true
+    image: dleongsh/standardizer-service:1.0.0
+    volumes:
+      - ./ext/std:/workspace
+      - shared-data:/shared-data
+    ports:
+     - 8081:8081
+
+  lid-inference:
+    stdin_open: true
+    image: dleongsh/lid-inference-service:1.0.0
+    volumes:
+      - ./ext/lid:/workspace
+      - shared-data:/shared-data
+    ports:
+     - 8082:8082
+
+  esc-inference:
+    stdin_open: true
+    image: dleongsh/esc-inference-service:1.0.0
+    volumes:
+      - ./ext/esc:/workspace
+      - shared-data:/shared-data
+    ports:
+     - 8083:8083
+
+  asr-inference:
+    stdin_open: true
+    image: dleongsh/asr-inference-service:1.0.0
+    volumes:
+      - ./ext/asr:/workspace
+      - shared-data:/shared-data
+    ports:
+     - 8084:8084
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    shm_size: 16gb
+
+
+volumes:
+    shared-data:
+        external: false
